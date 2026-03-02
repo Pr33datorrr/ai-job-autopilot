@@ -1,0 +1,20 @@
+# Environment files
+.env
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Requisite files (sensitive)
+req_files/
+
+# Output artifacts (generated PDFs)
+output/

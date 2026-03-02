@@ -1,0 +1,181 @@
+{
+    "personal_info": {
+        "name": "Yash Gupta",
+        "email": "hello@yashanalytics.pro",
+        "phone": "",
+        "location": "Surrey, BC, Canada",
+        "github": "https://github.com/Pr33datorrr",
+        "linkedin": "https://linkedin.com/in/iyashgupta"
+    },
+    "education": [
+        {
+            "institution": "University Canada West",
+            "degree": "Master of Business Administration -- Specialization: AI & ML",
+            "location": "Vancouver, BC",
+            "graduation_date": "Present",
+            "start_date": "Oct 2023",
+            "gpa": "",
+            "relevant_coursework": []
+        },
+        {
+            "institution": "Georgian College",
+            "degree": "Postgraduate Certificate in Big Data Analytics",
+            "location": "Barrie, ON",
+            "graduation_date": "April 2024",
+            "gpa": "92%",
+            "relevant_coursework": [
+                "Machine Learning",
+                "Data Warehousing",
+                "Big Data with Hadoop and Spark",
+                "Statistical Analysis",
+                "Data Visualization",
+                "Database Management"
+            ]
+        },
+        {
+            "institution": "Chitkara University",
+            "degree": "Bachelor of Engineering in Computer Science",
+            "location": "Punjab, India",
+            "graduation_date": "August 2020",
+            "gpa": "8.2/10",
+            "relevant_coursework": [
+                "Data Structures and Algorithms",
+                "Database Systems",
+                "Object-Oriented Programming",
+                "Software Engineering",
+                "Operating Systems"
+            ]
+        }
+    ],
+    "technical_skills": {
+        "languages": [
+            "Python",
+            "SQL",
+            "SAP ABAP",
+            "TypeScript",
+            "Shell Scripting",
+            "HTML/CSS"
+        ],
+        "data_engineering": [
+            "Apache Spark",
+            "Hadoop",
+            "ETL Pipelines",
+            "Data Warehousing",
+            "Data Modeling",
+            "Firebase Firestore"
+        ],
+        "databases": [
+            "MS SQL Server",
+            "MySQL",
+            "PostgreSQL",
+            "SQLite",
+            "Firebase Firestore"
+        ],
+        "ml_and_ai": [
+            "Scikit-Learn",
+            "Pandas",
+            "NumPy",
+            "Google Gemini API",
+            "Ollama (Local LLMs)",
+            "NLP",
+            "Prompt Engineering",
+            "RAG Pipelines"
+        ],
+        "visualization": [
+            "Power BI",
+            "Tableau",
+            "Looker Studio",
+            "Matplotlib",
+            "Streamlit"
+        ],
+        "cloud_and_devops": [
+            "AWS (S3, EC2)",
+            "Google Cloud Platform",
+            "GitHub Actions CI/CD",
+            "Docker",
+            "Git"
+        ],
+        "tools_and_frameworks": [
+            "Streamlit",
+            "React",
+            "Vite",
+            "BeautifulSoup",
+            "feedparser",
+            "REST APIs",
+            "Discord Webhooks",
+            "Jinja2"
+        ]
+    },
+    "work_experience": [
+        {
+            "company": "Infosys",
+            "role": "Senior Systems Engineer",
+            "location": "Pune, India",
+            "start_date": "Nov 2020",
+            "end_date": "Aug 2023",
+            "bullets": [
+                "Engineered a Python-based automation framework that reduced ticket resolution latency by 250\\%, saving approximately 40 engineering hours per week across the global support team.",
+                "Optimized complex SQL queries and database indexing strategies on MS SQL Server for datasets exceeding 10M+ rows, achieving a 40\\% improvement in query execution time and ensuring 99.9\\% data reliability for mission-critical business reports.",
+                "Designed and deployed 12+ automated SAP workflows using Python and ABAP, eliminating manual data entry for finance and logistics teams and reducing human error by 30\\%.",
+                "Strengthened enterprise data security by conducting rigorous audit cycles and implementing access-control protocols, reducing system vulnerabilities by 25\\% across 3 SAP modules.",
+                "Collaborated with a cross-functional team of 8 engineers across 3 time zones to deliver quarterly platform upgrades, consistently meeting 100\\% of sprint deadlines."
+            ]
+        },
+        {
+            "company": "Icertis",
+            "role": "Solution Engineer Intern",
+            "location": "Pune, India",
+            "start_date": "Jan 2020",
+            "end_date": "June 2020",
+            "bullets": [
+                "Partnered with senior consultants on high-level design and implementation of contract lifecycle management (CLM) product features for enterprise clients.",
+                "Developed and tested secure, scalable product modules using .NET, contributing to a feature release adopted by 3 Fortune 500 clients.",
+                "Documented technical specifications and created workflow diagrams for 5+ product features, accelerating the onboarding process for new engineering hires."
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "name": "AI Job Application Pipeline",
+            "tech_stack": "Python, Google Sheets API, Jinja2, LaTeX, LLM APIs",
+            "date": "2026",
+            "github_url": "",
+            "bullets": [
+                "Architected an end-to-end automated job application pipeline in Python that scrapes listings, tailors resumes via LLM-powered bullet generation, compiles LaTeX PDFs, and logs applications to Google Sheets.",
+                "Implemented Jinja2-based dynamic template rendering to inject AI-tailored bullet points into a LaTeX resume template, enabling per-application customization at scale."
+            ]
+        },
+        {
+            "name": "TEF Master Cloud",
+            "tech_stack": "Python, Streamlit, Google Gemini, Ollama, Firebase Firestore, DuckDuckGo Search API",
+            "date": "2025 -- 2026",
+            "github_url": "https://github.com/Pr33datorrr/TEF-Master-Local",
+            "bullets": [
+                "Built a hybrid AI-powered language exam prep platform using Streamlit, featuring auto-switching between local Ollama (Gemma 3 27B) and cloud Google Gemini backends based on runtime environment detection.",
+                "Engineered a 30-week structured curriculum engine with gamification (XP, streaks, levels), dynamic grammar drills, and AI-generated reading comprehension modules, backed by Firebase Firestore for persistent progress tracking.",
+                "Integrated a TEF Writing Clinic that evaluates essays against official TEF rubrics (Structure, Vocabulary, Grammar) using LLM-based scoring, delivering line-by-line corrections and a score out of 450."
+            ]
+        },
+        {
+            "name": "AI Newsletter Automation Bot",
+            "tech_stack": "Python, Google GenAI SDK, feedparser, BeautifulSoup, Discord Webhooks, GitHub Actions",
+            "date": "2026",
+            "github_url": "https://github.com/Pr33datorrr/discord-newsletter-bot",
+            "bullets": [
+                "Developed a serverless data pipeline that ingests content from 3 AI newsletter RSS feeds, scrapes full article bodies with BeautifulSoup, and produces structured 5-minute digest summaries using Google Gemini.",
+                "Automated daily execution via GitHub Actions cron workflows, delivering rich-embed formatted newsletters to Discord channels with zero hosting cost and 100\\% uptime reliability.",
+                "Designed modular source-adapter architecture supporting RSS, web scraping, and direct URL fetching, enabling seamless addition of new newsletter sources without code changes."
+            ]
+        },
+        {
+            "name": "AI Assignment Helper",
+            "tech_stack": "TypeScript, React 19, Vite, Google GenAI SDK, jsPDF, html2canvas",
+            "date": "2025",
+            "github_url": "https://github.com/Pr33datorrr/AI-Assignment-Helper",
+            "bullets": [
+                "Built a full-stack AI-powered assignment assistant using React 19 and TypeScript, integrating the Google GenAI SDK to provide real-time, context-aware academic guidance and structured output generation.",
+                "Implemented PDF export functionality using jsPDF and html2canvas, enabling users to download AI-generated solutions as professionally formatted documents."
+            ]
+        }
+    ]
+}

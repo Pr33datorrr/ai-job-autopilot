@@ -1,0 +1,200 @@
+%-------------------------
+% Resume in LaTeX (Jake's Resume)
+% Author: Yash Gupta
+% Based on: https://github.com/sb2nov/resume
+% License: MIT
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{iftex}
+\ifpdftex
+  \input{glyphtounicode}
+\fi
+
+%----------FONT OPTIONS----------
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generated pdf is machine readable/ATS parsable
+\ifpdftex
+  \pdfgentounicode=1
+\fi
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Yash Gupta} \\ \vspace{1pt}
+    \small
+    \href{mailto:hello@yashanalytics.pro}{\underline{hello@yashanalytics.pro}} $|$
+    \href{https://linkedin.com/in/iyashgupta}{\underline{linkedin.com/in/iyashgupta}} $|$
+    \href{https://github.com/Pr33datorrr}{\underline{github.com/Pr33datorrr}} $|$
+    Surrey, BC, Canada
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University Canada West}{Vancouver, BC}
+      {Master of Business Administration -- Specialization: AI \& ML}{Oct 2025 -- Present}
+    \resumeSubheading
+      {Georgian College}{Barrie, ON}
+      {Postgraduate Certificate in Big Data Analytics -- GPA: 92\%}{Jan 2023 -- April 2024}
+    \resumeSubheading
+      {Chitkara University}{Punjab, India}
+      {Bachelor of Engineering in Computer Science -- GPA: 8.2/10}{Aug 2016 -- Aug 2020}
+  \resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, SQL, SAP ABAP, TypeScript, Shell Scripting, HTML/CSS} \\
+     \textbf{Data Engineering}{: Apache Spark, Hadoop, ETL Pipelines, Data Warehousing, Data Modeling} \\
+     \textbf{Databases}{: MS SQL Server, MySQL, PostgreSQL, SQLite, Firebase Firestore} \\
+     \textbf{ML \& AI}{: Scikit-Learn, Pandas, NumPy, Google Gemini API, Ollama (Local LLMs), NLP, Prompt Engineering} \\
+     \textbf{Visualization}{: Power BI, Tableau, Looker Studio, Matplotlib, Streamlit} \\
+     \textbf{Cloud \& DevOps}{: AWS (S3, EC2), Google Cloud Platform, GitHub Actions CI/CD, Docker, Git} \\
+     \textbf{Frameworks \& Tools}{: Streamlit, React, Vite, BeautifulSoup, feedparser, REST APIs, Jinja2}
+    }}
+ \end{itemize}
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    %--- MOST RELEVANT ROLE: DYNAMIC BULLETS (Jinja2 placeholders) ---
+    \resumeSubheading
+      {Senior Systems Engineer}{Nov 2020 -- Aug 2023}
+      {Infosys}{Pune, India}
+      \resumeItemListStart
+        \resumeItem{[[BULLET1]]}
+        \resumeItem{[[BULLET2]]}
+        \resumeItem{[[BULLET3]]}
+        \resumeItem{[[BULLET4]]}
+        \resumeItem{[[BULLET5]]}
+      \resumeItemListEnd
+
+    %--- INTERNSHIP: HARDCODED ---
+    \resumeSubheading
+      {Solution Engineer Intern}{Jan 2020 -- June 2020}
+      {Icertis}{Pune, India}
+      \resumeItemListStart
+        \resumeItem{Partnered with senior consultants on high-level design and implementation of contract lifecycle management (CLM) features for enterprise clients.}
+        \resumeItem{Developed and tested secure, scalable product modules using .NET, contributing to a feature release adopted by 3 Fortune 500 clients.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+      {\textbf{TEF Master Cloud} $|$ \emph{Python, Streamlit, Google Gemini, Ollama, Firebase, DuckDuckGo Search}}{2025 -- 2026}
+      \resumeItemListStart
+        \resumeItem{Built a hybrid AI-powered language exam prep platform using Streamlit, featuring auto-switching between local Ollama (Gemma 3 27B) and cloud Google Gemini backends based on runtime environment detection.}
+        \resumeItem{Engineered a 30-week structured curriculum engine with gamification (XP, streaks, levels), dynamic grammar drills, and AI-generated reading comprehension modules, backed by Firebase Firestore for persistent progress tracking.}
+        \resumeItem{Integrated a TEF Writing Clinic that evaluates essays against official TEF rubrics using LLM-based scoring, delivering line-by-line corrections and a score out of 450.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{AI Newsletter Automation Bot} $|$ \emph{Python, Google GenAI SDK, feedparser, BeautifulSoup, Discord, GitHub Actions}}{2026}
+      \resumeItemListStart
+        \resumeItem{Developed a serverless data pipeline that ingests content from 3 AI newsletter RSS feeds, scrapes full article bodies with BeautifulSoup, and produces structured 5-minute digest summaries using Google Gemini.}
+        \resumeItem{Automated daily execution via GitHub Actions cron workflows, delivering rich-embed formatted newsletters to Discord channels with zero hosting cost and 100\% uptime reliability.}
+        \resumeItem{Designed modular source-adapter architecture supporting RSS, web scraping, and direct URL fetching, enabling seamless addition of new newsletter sources without code changes.}
+      \resumeItemListEnd
+
+    \resumeProjectHeading
+      {\textbf{AI Assignment Helper} $|$ \emph{TypeScript, React 19, Vite, Google GenAI SDK, jsPDF, html2canvas}}{2025}
+      \resumeItemListStart
+        \resumeItem{Built a full-stack AI-powered assignment assistant using React 19 and TypeScript, integrating the Google GenAI SDK to provide real-time, context-aware academic guidance and structured output generation.}
+        \resumeItem{Implemented PDF export functionality using jsPDF and html2canvas, enabling users to download AI-generated solutions as professionally formatted documents.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-------------------------------------------
+\end{document}

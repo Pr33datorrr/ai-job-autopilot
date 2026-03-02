@@ -1,0 +1,51 @@
+name: Daily AI Job Autopilot
+
+on:
+  # Run every day at 17:00 UTC (9:00 AM PST / 10:00 AM PDT)
+  schedule:
+    - cron: '0 17 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install LaTeX Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Inject Google Sheets Credentials
+        run: |
+          mkdir -p req_files
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_JSON }}" > req_files/gcp_service_account.json
+
+      - name: Run Pipeline (Safe Mode)
+        env:
+          GEMMA_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          # The host can be hardcoded or injected if needed, but not strictly required by secrets
+          RAPIDAPI_HOST: jsearch.p.rapidapi.com
+          SMTP2GO_USERNAME: ${{ secrets.SMTP2GO_USER }}
+          SMTP2GO_PASSWORD: ${{ secrets.SMTP2GO_PASS }}
+          SAFE_MODE_EMAIL: ${{ secrets.SAFE_MODE_EMAIL }}
+          # Required for SheetManager to find the file
+          GOOGLE_SHEETS_CREDENTIALS: req_files/gcp_service_account.json
+          GOOGLE_SHEETS_ID: 1Nd-sFG_j7FrGIE2rv_o6-VOf7C2XmE0zdVEIjbcDkgY
+        run: |
+          python main.py
