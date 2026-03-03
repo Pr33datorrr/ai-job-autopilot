@@ -38,13 +38,16 @@ class SheetManager:
     def _initialize_headers(self):
         """
         Checks if the first row is empty. 
-        If it is, inserts the exact headers: Job_Hash_ID, Company, Job_Title, Status, Apply_Link.
+        If it is, inserts the exact headers.
         """
         try:
-            # We look at the first row to determine if headers exist
             first_row = self.sheet.row_values(1)
             if not first_row:
-                headers = ["Job_Hash_ID", "Company", "Job_Title", "Status", "Apply_Link"]
+                headers = [
+                    "Job_Hash_ID", "Company", "Job_Title", "Status",
+                    "Match_Score", "Pain_Point", "Email_Draft_Body",
+                    "PDF_Cloud_Link", "Job_Link",
+                ]
                 self.sheet.insert_row(headers, 1)
                 print("Initialized Google Sheet with headers.")
         except Exception as e:
@@ -55,21 +58,50 @@ class SheetManager:
         Checks if a job hash already exists in column A of the sheet.
         """
         try:
-            # Gets all values in column A (1-indexed)
-            # col_values(1) returns ['Job Hash (Header)', 'hash1', 'hash2', ...]
             col_a_values = self.sheet.col_values(1)
             return job_hash_id in col_a_values
         except Exception as e:
             print(f"Error checking if job exists: {e}")
-            # If there's an error (e.g. rate limit), safely assume we don't have it to potentially retry?
-            # actually better to return False or raise, returning False is safest for logging.
             return False
 
-    def log_job(self, job_hash_id: str, company: str, title: str, status: str, link: str) -> None:
+    def log_job(
+        self,
+        job_hash_id: str,
+        company: str,
+        title: str,
+        status: str,
+        match_score: str = "",
+        pain_point: str = "",
+        email_draft_body: str = "",
+        pdf_cloud_link: str = "",
+        job_link: str = "",
+    ) -> None:
         """
         Appends a new row to the sheet.
+
+        Column order:
+        Job_Hash_ID | Company | Job_Title | Status | Match_Score |
+        Pain_Point | Email_Draft_Body | PDF_Cloud_Link | Job_Link
         """
         try:
-            self.sheet.append_row([job_hash_id, company, title, status, link])
+            self.sheet.append_row([
+                job_hash_id, company, title, status,
+                str(match_score), pain_point, email_draft_body,
+                pdf_cloud_link, job_link,
+            ])
         except Exception as e:
             print(f"Error logging job: {e}")
+
+    def update_status(self, job_hash_id: str, new_status: str) -> None:
+        """
+        Find the row whose column A matches *job_hash_id* and update
+        its Status cell (column D) to *new_status*.
+        """
+        try:
+            cell = self.sheet.find(job_hash_id, in_column=1)
+            if cell:
+                self.sheet.update_cell(cell.row, 4, new_status)
+            else:
+                print(f"[SheetManager] Hash '{job_hash_id}' not found.")
+        except Exception as e:
+            print(f"Error updating status: {e}")

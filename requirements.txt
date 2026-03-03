@@ -3,3 +3,5 @@ gspread
 oauth2client
 python-dotenv
 google-genai
+google-api-python-client
+streamlit
