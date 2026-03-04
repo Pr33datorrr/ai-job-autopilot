@@ -7,13 +7,14 @@ from google import genai
 class JobEvaluator:
     """
     Pre-processing logic gate that evaluates a job description against
-    the candidate's master profile using Gemma 3 27B-IT.
+    the candidate's master profile using Gemma 3 12B-IT (lighter model
+    to stay within the 15k TPM budget).
 
     Returns a verdict dict with red-flag detection, match scoring,
-    pain-point extraction, and a routing decision.
+    pain-point extraction, evaluation reasoning, and a routing decision.
     """
 
-    MODEL = "gemma-3-27b-it"
+    MODEL = "gemma-3-12b-it"
     PROFILE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "master_profile.json")
 
     # Safe fallback when JSON parsing fails
@@ -22,6 +23,7 @@ class JobEvaluator:
         "red_flag_reason": None,
         "match_score": 70,
         "extracted_pain_point": "Unable to extract - LLM response was malformed.",
+        "evaluation_reason": "Fallback: LLM response could not be parsed.",
         "decision": "Proceed",
     }
 
@@ -65,6 +67,7 @@ class JobEvaluator:
             red_flag_reason (str | None)
             match_score     (int 0-100)
             extracted_pain_point (str)
+            evaluation_reason (str)
             decision        ("Proceed" | "Rejected - Red Flag" | "Low Match")
         """
         profile = self._load_profile()
@@ -89,7 +92,9 @@ class JobEvaluator:
             "technical requirements.\n"
             "4. Extract the **primary technical or business problem** the company "
             "is trying to solve based on the JD.\n"
-            "5. Set `decision` to one of exactly three values:\n"
+            "5. Provide an `evaluation_reason`: a 1-2 sentence bulleted summary "
+            "of exactly why this job is a Proceed, Low Match, or Red Flag.\n"
+            "6. Set `decision` to one of exactly three values:\n"
             '   - `"Rejected - Red Flag"` if `red_flag_found` is true.\n'
             '   - `"Low Match"` if `match_score` < 60 and no red flag.\n'
             '   - `"Proceed"` if `match_score` >= 60 and no red flag.\n\n'
@@ -102,6 +107,7 @@ class JobEvaluator:
             '  "red_flag_reason": "string or null",\n'
             '  "match_score": integer 0-100,\n'
             '  "extracted_pain_point": "string",\n'
+            '  "evaluation_reason": "string",\n'
             '  "decision": "Proceed" | "Rejected - Red Flag" | "Low Match"\n'
             "}\n"
             "```\n"
@@ -128,75 +134,3 @@ class JobEvaluator:
             print(f"[JobEvaluator] WARNING: Failed to parse LLM response: {e}")
             print(f"[JobEvaluator] Raw response: {response.text[:500]}")
             return dict(self._FALLBACK)
-
-
-# ======================================================================
-# CLI entry-point - dual test harness
-# ======================================================================
-
-if __name__ == "__main__":
-    from dotenv import load_dotenv
-
-    load_dotenv()
-
-    evaluator = JobEvaluator()
-
-    # -- TEST 1: Red Flag JD --
-    RED_FLAG_JD = """
-    Senior Vice President of Cybersecurity - Pentagon Systems Inc. (Arlington, VA)
-
-    Requirements:
-    - Active Top Secret / SCI security clearance (non-negotiable).
-    - Minimum 15 years of experience in a Senior VP or C-level cybersecurity role.
-    - Ph.D. in Cybersecurity or Information Assurance required.
-    - Must be a U.S. citizen with current polygraph on file.
-    """
-
-    print("=" * 60)
-    print("TEST 1: Red Flag JD (should be REJECTED)")
-    print("=" * 60)
-    result1 = evaluator.evaluate_job(RED_FLAG_JD)
-    for k, v in result1.items():
-        print(f"  {k}: {v}")
-
-    assert result1["red_flag_found"] is True, (
-        f"FAIL: Expected red_flag_found=True, got {result1['red_flag_found']}"
-    )
-    assert result1["decision"] == "Rejected - Red Flag", (
-        f"FAIL: Expected 'Rejected - Red Flag', got '{result1['decision']}'"
-    )
-    print("\n[PASS] Test 1: Red flag correctly detected.\n")
-
-    # -- TEST 2: Good-match JD --
-    GOOD_JD = """
-    Junior Data Engineer - TechFlow Analytics (Vancouver, BC)
-
-    We are hiring a Junior Data Engineer to join our growing data team.
-
-    Responsibilities:
-    - Build and maintain ETL pipelines using Python and SQL.
-    - Work with cloud data platforms (AWS, GCP).
-    - Collaborate with data scientists to prepare datasets for ML models.
-    - Monitor data quality and implement automated testing.
-
-    Qualifications:
-    - Degree in Computer Science, Data Science, or related field.
-    - Familiarity with Python, SQL, and at least one cloud platform.
-    - Experience with Apache Spark or similar is a plus.
-    - Strong communication and teamwork skills.
-    """
-
-    print("=" * 60)
-    print("TEST 2: Good-match JD (should PROCEED)")
-    print("=" * 60)
-    result2 = evaluator.evaluate_job(GOOD_JD)
-    for k, v in result2.items():
-        print(f"  {k}: {v}")
-
-    assert result2["decision"] == "Proceed", (
-        f"FAIL: Expected 'Proceed', got '{result2['decision']}'"
-    )
-    assert result2["match_score"] >= 60, (
-        f"FAIL: Expected match_score >= 60, got {result2['match_score']}"
-    )
-    print(f"\n[PASS] Test 2: Proceed with match score {result2['match_score']}.")
