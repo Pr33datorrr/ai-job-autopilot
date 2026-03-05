@@ -14,6 +14,26 @@ st.set_page_config(
     layout="wide",
 )
 
+
+def bootstrap_cloud_env():
+    """Write credential files and inject env vars from Streamlit Secrets."""
+    os.makedirs("req_files", exist_ok=True)
+    if "GCP_SERVICE_ACCOUNT_JSON" in st.secrets:
+        sa_path = os.path.join("req_files", "gcp_service_account.json")
+        with open(sa_path, "w") as f:
+            f.write(st.secrets["GCP_SERVICE_ACCOUNT_JSON"])
+        os.environ.setdefault("GOOGLE_SHEETS_CREDENTIALS", sa_path)
+    if "GCP_OAUTH_TOKEN_JSON" in st.secrets:
+        with open(os.path.join("req_files", "token.json"), "w") as f:
+            f.write(st.secrets["GCP_OAUTH_TOKEN_JSON"])
+    for env_var in ["GOOGLE_SHEETS_ID", "DRIVE_ROOT_FOLDER_ID", "SAFE_MODE_EMAIL"]:
+        if env_var in st.secrets:
+            os.environ.setdefault(env_var, st.secrets[env_var])
+
+
+bootstrap_cloud_env()
+
+
 st.markdown(
     """
     <style>
