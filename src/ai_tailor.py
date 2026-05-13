@@ -106,5 +106,6 @@ class ResumeTailor:
             config=types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(thinking_level="high")
         )
+        )
 
         return self._clean_response(response.text)
