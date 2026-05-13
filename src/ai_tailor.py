@@ -6,12 +6,12 @@ from google import genai
 
 class ResumeTailor:
     """
-    Uses the Google GenAI SDK (Gemma 3 27B-IT) to generate
+    Uses the Google GenAI SDK (Gemma 4 31B-IT) to generate
     tailored resume bullet points and a cold email from a
     job description, grounded strictly in the user's master profile.
     """
 
-    MODEL = "gemma-3-27b-it"
+    MODEL = "gemma-4-31b-it"
     PROFILE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "master_profile.json")
 
     def __init__(self):
@@ -103,6 +103,8 @@ class ResumeTailor:
         response = self.client.models.generate_content(
             model=self.MODEL,
             contents=prompt,
+            config=types.GenerateContentConfig(
+        thinking_config=types.ThinkingConfig(thinking_level="high")
         )
 
         return self._clean_response(response.text)
