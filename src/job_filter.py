@@ -2,6 +2,7 @@ import os
 import re
 import json
 from google import genai
+from google.genai import types
 
 
 class JobEvaluator:
