@@ -127,8 +127,9 @@ class JobEvaluator:
             model=self.MODEL,
             contents=prompt,
             config=types.GenerateContentConfig(
-        thinking_level="high" # Enables reasoning process)
-        )
+        thinking_level="high" # Enables reasoning process
+            )
+            )
 
         try:
             return self._clean_response(response.text)
