@@ -14,7 +14,7 @@ class JobEvaluator:
     pain-point extraction, evaluation reasoning, and a routing decision.
     """
 
-    MODEL = "gemma-3-12b-it"
+    MODEL = "gemma-4-26b-a4b-it"
     PROFILE_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "master_profile.json")
 
     # Safe fallback when JSON parsing fails
@@ -126,6 +126,8 @@ class JobEvaluator:
         response = self.client.models.generate_content(
             model=self.MODEL,
             contents=prompt,
+            config=types.GenerateContentConfig(
+        thinking_level="high" # Enables reasoning process)
         )
 
         try:
